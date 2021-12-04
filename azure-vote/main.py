@@ -8,7 +8,6 @@ import logging
 from datetime import datetime
 
 # App Insights
-# TODO: Import required libraries for App Insights
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 from opencensus.ext.azure import metrics_exporter
 from opencensus.stats import aggregation as aggregation_module
@@ -20,6 +19,8 @@ from opencensus.ext.azure.trace_exporter import AzureExporter
 from opencensus.trace.samplers import ProbabilitySampler
 from opencensus.trace.tracer import Tracer
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
+from applicationinsights import TelemetryClient
+
 
 app = Flask(__name__)
 
@@ -29,13 +30,12 @@ middleware = FlaskMiddleware(
     exporter=AzureExporter(connection_string='InstrumentationKey=ed0b8d90-2ba2-48d2-a78c-6ec26c6cd105'),
     sampler=ProbabilitySampler(rate=1.0),
 )
-# TODO: Setup flask middleware
 
 # Logging
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=ed0b8d90-2ba2-48d2-a78c-6ec26c6cd105'))
 
-# Metrics TODO: Setup exporter
+# Metrics
 exporter = metrics_exporter.new_metrics_exporter(
     enable_standard_metrics=True,
     connection_string='InstrumentationKey=ed0b8d90-2ba2-48d2-a78c-6ec26c6cd105'
