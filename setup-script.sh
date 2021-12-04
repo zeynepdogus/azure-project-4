@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Variables
-resourceGroup="acdnd-c4-project"
+resourceGroup="azure-c4-project"
 location="westus"
 osType="UbuntuLTS"
-vmssName="udacity-vmss"
+vmssName="azure-vmss"
 adminName="udacityadmin"
 storageAccount="udacitydiag$RANDOM"
 bePoolName="$vmssName-bepool"
