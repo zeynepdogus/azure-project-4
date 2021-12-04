@@ -27,24 +27,24 @@ app = Flask(__name__)
 # Requests
 middleware = FlaskMiddleware(
     app,
-    exporter=AzureExporter(connection_string='InstrumentationKey=3dd747fa-32a2-4626-a44f-80f97265e0bf'),
+    exporter=AzureExporter(connection_string='InstrumentationKey=3dd747fa-32a2-4626-a44f-80f97265e0bf;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'),
     sampler=ProbabilitySampler(rate=1.0),
 )
 
 # Logging
 logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=3dd747fa-32a2-4626-a44f-80f97265e0bf'))
-logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=3dd747fa-32a2-4626-a44f-80f97265e0bf'))
+logger.addHandler(AzureLogHandler(connection_string='InstrumentationKey=3dd747fa-32a2-4626-a44f-80f97265e0bf;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'))
+logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=3dd747fa-32a2-4626-a44f-80f97265e0bf;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'))
 
 # Metrics
 exporter = metrics_exporter.new_metrics_exporter(
     enable_standard_metrics=True,
-    connection_string='InstrumentationKey=3dd747fa-32a2-4626-a44f-80f97265e0bf'
+    connection_string='InstrumentationKey=3dd747fa-32a2-4626-a44f-80f97265e0bf;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'
 )
 # Tracing
 tracer = Tracer(
     exporter = AzureExporter(
-        connection_string = 'InstrumentationKey=3dd747fa-32a2-4626-a44f-80f97265e0bf'),
+        connection_string = 'InstrumentationKey=3dd747fa-32a2-4626-a44f-80f97265e0bf;IngestionEndpoint=https://westus2-2.in.applicationinsights.azure.com/'),
     sampler = ProbabilitySampler(1.0),
 )
 
